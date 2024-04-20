@@ -11,6 +11,9 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
 
+//importamos las rutas que utilizan la librería mongoose
+import mongooseRouter from './routes/mongooseRouter.js';
+
 const app = express();
 
 // view engine setup
@@ -30,6 +33,7 @@ app.use(express.static('public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/productos', mongooseRouter);
 
 //pagina de error 404
 app.get('*', (req, res)=>{
