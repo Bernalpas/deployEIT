@@ -4,7 +4,7 @@ const router = express.Router();
 import { 
     mostrarFormulario, 
     cargarFormulario
-} from '../controllers/mongooseproduct.js';
+} from '../controllers/mongooseProduct.js';
 
 /* GET users listing. */
 router.get('/', mostrarFormulario);
