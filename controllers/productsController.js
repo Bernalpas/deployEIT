@@ -41,7 +41,7 @@ const cargarFormulario = async (req, res) => {
     productos.push(producto);
 
     //guardamos el producto en un archivo .txt sincrónico
-    fs.writeFileSync('archivos/productosSync.txt', JSON.stringify(productos));
+    //fs.writeFileSync('archivos/productosSync.txt', JSON.stringify(productos));
 
     await client.connect();
 
