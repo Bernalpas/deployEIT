@@ -12,7 +12,7 @@ console.log(MONGO_ATLAS_MONGOOSE);
 const conectarMongoose = mongoose.connect(MONGO_ATLAS_MONGOOSE).then(
     () => {
         console.log('=======================================');
-        console.log(`Conexion realizada correctamente a: ${MONGO_LOCAL_MONGOOSE}`);
+        console.log(`Conexion realizada correctamente a: ${MONGO_ATLAS_MONGOOSE}`);
     },
     err => {
         console.log('=======================================');
