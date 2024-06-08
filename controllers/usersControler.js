@@ -96,7 +96,7 @@ const registrarUsuario = async (req, res) => {
 
 }
 
-const loginUsuario = async (req, res) => {
+const loginUsuario = async (req = request, res = response) => {
 
     
     const errores = validationResult(req);
@@ -131,7 +131,7 @@ const loginUsuario = async (req, res) => {
 
     //comparamos la password encriptada con la password enviada
     //const passwordCorrecto = await bcrypt.compareSync(password, existeUser.password);
-    const passwordCorrecto = await bcrypt.compareSync(password, existeUser[0].password);
+    const passwordCorrecto = await bcrypt.compare(password, existeUser[0].password);
 
         if(!passwordCorrecto){
             return res.json({
@@ -142,6 +142,7 @@ const loginUsuario = async (req, res) => {
 
             //generar un user
         const user = {
+            _id: existeUser[0]._id,
             nombre: existeUser[0].nombreUser,
             email: existeUser[0].emailUser,
             password: existeUser[0].password
@@ -149,17 +150,41 @@ const loginUsuario = async (req, res) => {
 
         
 
-        //asignar el JWT al User
+        //asignar el JWT al User con algunos datos
+        //const token = await generarJWT(user.nombre, user.email);
+
+        //asignar el JWT al User con todos los datos datos
         const token = await generarJWT(user);
 
         console.log(token);
+        //console.log(req);
+        
+        res.cookie('xToken', token)
 
-        req.header = ('x-token', token)
+        
 
-    
-        res.render('admin',{
+        //agegamos la sesión al user con el token
+        req.session.user = {
+            _id: user._id,
+            nombre: user.nombre,
+            email: user.email,
             token
+        };
+
+        console.log('===================================');
+        console.log(req.session.user);
+        console.log('===================================');
+
+        await req.session.save();
+
+        console.log('Usuario autencicado correctamente');
+
+        res.json({
+            mensaje: 'Usuario autenticado correctamente',
+            user
         });
+    
+        //res.render('admin');
         
 
     } catch (error) {

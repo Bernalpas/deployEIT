@@ -1,5 +1,6 @@
 import Producto from '../models/productModels.js';
 //const Productos = new Producto();
+import jwt from 'jsonwebtoken';
 
 import { request, response } from 'express';
 
@@ -47,29 +48,44 @@ const cargarFormulario =  async (req, res) => {
 //listar todos los productos
 const listarProductosTabla = async (req, res) =>{
 
+    const cookieToken = req.cookies.xToken;
+
     try {
-
-        //buscamos todos los productos
-        const listaProductos = await Producto.find();
-
-        //mostramos los productos en consola
-        console.log(listaProductos);
+        const valido = await jwt.verify(cookieToken, process.env.SECRET_JWT);
+        console.log(cookieToken);
         
-        //renderizamos la vista listarProductos y enviamos los productos
-        return res.render('listarProductos',{
-            message: 'Vienen todos los productos',
-            productos: listaProductos
-        });
+        try {
+            //buscamos todos los productos
+            const listaProductos = await Producto.find();
 
+            //mostramos los productos en consola
+            console.log(listaProductos);
+            
+            //renderizamos la vista listarProductos y enviamos los productos
+            return res.render('listarProductos',{
+                message: 'Vienen todos los productos',
+                productos: listaProductos
+            });
+
+
+        } catch (error) {
+
+            console.log(error);
+
+            return res.render('error',{
+                message: 'Nuestro ingenieros estan trabajando en el problema, vuelva mas tarde'
+            });
+
+        }
+        
     } catch (error) {
-
-        console.log(error);
-
-        return res.render('error',{
-            message: 'Nuestro ingenieros estan trabajando en el problema, vuelva mas tarde'
+        return res.render('error', {
+            message: 'No tiene permisos para ver esta página'
         });
-
+        
     }
+
+
 };
 
 
