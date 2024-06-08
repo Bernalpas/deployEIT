@@ -4,6 +4,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import hbs from 'hbs';
+import cors from 'cors';
 
 
 //importamos las rutas de la app
@@ -26,7 +27,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('public'));
+//app.use(express.static(path.join(__dirname, '/public')));
+
+/* const option = {
+  origin: 'http://example.com'
+} */
+/* app.use(cors({
+  origin: 'http://example.com'
+})) */
+//app.use('/', cors(  option ), indexRouter);
 
 
 //utilizamos las rutas de la app

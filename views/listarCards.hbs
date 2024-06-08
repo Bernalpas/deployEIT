@@ -1,0 +1,33 @@
+<div class="m-5">
+
+    <h1 class="m-4 text-center">
+        Listado de Productos en Cards
+    </h1>
+
+    {{message}}
+
+    <div class="d-flex flex-row m-4 justify-content-center">
+
+        {{#each productos}} 
+
+            <div class="card m-3" style="width: 50rem;">
+                <img src={{imagenProducto}} class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{nombreProducto}}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content. {{_id}}
+                    </p>
+                    <a href="/productos/descripcion/{{ _id }}" class="btn btn-success">Ver Producto</a>
+                    <form action="/productos/delete/{{ _id }}" method="post">
+                        <input type="submit" class="btn btn-danger" value="Delete Producto">
+                    </form>
+                    <form action="/productos/update/{{ _id }}" method="get">
+                        <input type="submit" class="btn btn-warning" value="Update Producto">
+                    </form>
+                </div>
+            </div>
+
+        {{/each}}
+
+    </div>
+
+</div>
