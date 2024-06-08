@@ -25,7 +25,7 @@ async function enviarMail(mail, nombre) {
         html: `<h1>sale por el mes de Mayo!!</h1> <br>
         <h2>Hola ${nombre}, bienvenido a la App</h2>
         <p>Puedes comprar más productos en nuestro sitio: 
-            <a href="https://www.educacionit.com/" target="_blank">Comprar</a>
+            <a href="https://deployeit-production.up.railway.app/" target="_blank">Comprar</a>
         </p>`, // html body
     });
 
