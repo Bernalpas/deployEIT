@@ -7,7 +7,8 @@ import {
   formularioRegistro,
   formularioLogin,
   registrarUsuario,
-  loginUsuario
+  loginUsuario,
+  logoutUsuario
 } from '../controllers/usersControler.js';
 
 /* 
@@ -30,6 +31,9 @@ router.post('/login', [
   check('email').notEmpty().isEmail(),
   check('password').notEmpty().isLength({min: 8}),
 ] ,loginUsuario);
+
+
+router.post('/logout', logoutUsuario);
 
 
 export default router;

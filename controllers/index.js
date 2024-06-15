@@ -8,7 +8,7 @@ import {
     mostrarDescripcionProducto,
     eliminarProducto,
     actualizarProducto
-}from './mongooseProduct.js';
+}from '../mongooseProduct.js';
 
 
 export {

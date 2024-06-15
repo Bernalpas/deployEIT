@@ -195,9 +195,29 @@ const loginUsuario = async (req = request, res = response) => {
     }
 }
 
+const logoutUsuario = async (req, res) => {
+    //borramos la cookie
+
+    try {
+        
+        await res.clearCookie('xToken');
+    
+        //borramos la session
+        req.session.destroy();
+    
+        return res.render('loginUser');
+    } catch (error) {
+        console.log(error);
+        return res.render('error', {
+            message: error
+    });
+    }
+}
+
 export {
     formularioRegistro,
     formularioLogin,
     registrarUsuario,
-    loginUsuario
+    loginUsuario,
+    logoutUsuario
 }
